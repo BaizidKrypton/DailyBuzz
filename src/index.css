@@ -2,6 +2,98 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  :root {
+    /* Primary - Blue-500 (#3B82F6) */
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 100%;
+    
+    /* Secondary - Emerald-500 (#10B981) */
+    --secondary: 160 84% 39%;
+    --secondary-foreground: 0 0% 100%;
+    
+    /* Accent - Amber-500 (#F59E0B) */
+    --accent: 38 92% 50%;
+    --accent-foreground: 0 0% 100%;
+    
+    /* Background - Gray-50 (#F9FAFB) */
+    --background: 210 20% 98%;
+    --foreground: 217 33% 17%;
+    
+    /* Muted */
+    --muted: 210 14% 89%;
+    --muted-foreground: 217 11% 45%;
+    
+    /* Card */
+    --card: 0 0% 100%;
+    --card-foreground: 217 33% 17%;
+    
+    /* Popover */
+    --popover: 0 0% 100%;
+    --popover-foreground: 217 33% 17%;
+    
+    /* Border */
+    --border: 214 13% 87%;
+    --input: 214 13% 87%;
+    --ring: 217 91% 60%;
+    
+    /* Destructive */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    /* Primary - Blue-500 (adjusted for dark mode) */
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 100%;
+    
+    /* Secondary - Emerald-500 (adjusted for dark mode) */
+    --secondary: 160 84% 39%;
+    --secondary-foreground: 0 0% 100%;
+    
+    /* Accent - Amber-500 (adjusted for dark mode) */
+    --accent: 38 92% 50%;
+    --accent-foreground: 0 0% 100%;
+    
+    /* Background - Dark */
+    --background: 217 33% 10%;
+    --foreground: 210 20% 98%;
+    
+    /* Muted */
+    --muted: 217 33% 17%;
+    --muted-foreground: 210 14% 60%;
+    
+    /* Card */
+    --card: 217 33% 13%;
+    --card-foreground: 210 20% 98%;
+    
+    /* Popover */
+    --popover: 217 33% 13%;
+    --popover-foreground: 210 20% 98%;
+    
+    /* Border */
+    --border: 217 33% 17%;
+    --input: 217 33% 17%;
+    --ring: 217 91% 60%;
+    
+    /* Destructive */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+  }
+}
+
 /* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
 All colors MUST be HSL.
 */
