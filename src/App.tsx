@@ -13,6 +13,7 @@ import NotFound from "./pages/NotFound";
 import AlarmsList from "./pages/alarms/AlarmsList";
 import CreateAlarm from "./pages/alarms/CreateAlarm";
 import EditAlarm from "./pages/alarms/EditAlarm";
+import AlarmChallenge from "./pages/alarms/AlarmChallenge";
 import RemindersList from "./pages/reminders/RemindersList";
 import CreateReminder from "./pages/reminders/CreateReminder";
 import EditReminder from "./pages/reminders/EditReminder";
@@ -62,6 +63,14 @@ const App = () => (
             element={
               <ProtectedRoute>
                 <EditAlarm />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/alarm-challenge/:id"
+            element={
+              <ProtectedRoute>
+                <AlarmChallenge />
               </ProtectedRoute>
             }
           />

@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { alarmService } from '@/services/alarmService';
 import { reminderService } from '@/services/reminderService';
 import { notesService } from '@/services/notesService';
+import { alarmScheduler } from '@/services/alarmScheduler';
 import { Clock, CheckCircle2, StickyNote, Plus } from 'lucide-react';
 
 export default function Dashboard() {
@@ -20,7 +21,16 @@ export default function Dashboard() {
   useEffect(() => {
     if (user) {
       loadStats();
+      
+      // Start alarm scheduler
+      alarmScheduler.start(user.id, (alarmId) => {
+        navigate(`/alarm-challenge/${alarmId}`);
+      });
     }
+
+    return () => {
+      alarmScheduler.stop();
+    };
   }, [user]);
 
   const loadStats = async () => {

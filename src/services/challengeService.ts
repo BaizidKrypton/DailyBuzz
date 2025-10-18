@@ -9,6 +9,21 @@ interface Challenge {
 }
 
 export const challengeService = {
+  generateChallenge(type: ChallengeType, difficulty: DifficultyLevel): Challenge {
+    switch (type) {
+      case 'MATH':
+        return this.generateMathChallenge(difficulty);
+      case 'LOGIC':
+        return this.generateLogicPuzzle(difficulty);
+      case 'TRIVIA':
+        return this.generateTrivia(difficulty);
+      case 'MEMORY':
+        return this.generateMemoryGame(difficulty);
+      default:
+        return this.generateMathChallenge(difficulty);
+    }
+  },
+
   generateMathChallenge(difficulty: DifficultyLevel): Challenge {
     let num1: number, num2: number, operation: string, answer: number;
 
