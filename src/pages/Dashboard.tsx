@@ -57,16 +57,11 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-background p-6">
+    <div className="bg-background p-6">
       <div className="max-w-6xl mx-auto">
-        <div className="flex justify-between items-center mb-8">
-          <div>
-            <h1 className="text-4xl font-bold mb-2">Dashboard</h1>
-            <p className="text-muted-foreground">Welcome back, {user?.email?.split('@')[0]}!</p>
-          </div>
-          <Button onClick={handleSignOut} variant="outline">
-            Sign Out
-          </Button>
+        <div className="mb-8">
+          <h1 className="text-4xl font-bold mb-2">Dashboard</h1>
+          <p className="text-muted-foreground">Welcome back, {user?.email?.split('@')[0]}!</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
