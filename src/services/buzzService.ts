@@ -102,17 +102,25 @@ export const buzzService = {
     onDelta: (deltaText: string) => void;
     onDone: () => void;
   }): Promise<void> {
+    const { data: { session } } = await supabase.auth.getSession();
+    
     const response = await fetch(CHAT_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+        Authorization: `Bearer ${session?.access_token || import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
       },
       body: JSON.stringify({ messages }),
     });
 
     if (!response.ok) {
       const errorData = await response.json();
+      if (response.status === 429) {
+        throw new Error('OpenAI rate limit exceeded. Please wait a moment and try again.');
+      }
+      if (response.status === 402) {
+        throw new Error('OpenAI API key needs payment setup. Please check your OpenAI account billing.');
+      }
       throw new Error(errorData.error || 'Failed to start stream');
     }
 
