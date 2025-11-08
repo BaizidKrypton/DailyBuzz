@@ -55,28 +55,32 @@ export default function NotesList() {
   return (
     <div className="min-h-screen bg-background p-6">
       <div className="max-w-6xl mx-auto">
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-bold flex items-center gap-2">
-            <StickyNote className="h-8 w-8" />
-            Notes
-          </h1>
-          <Button onClick={() => navigate('/notes/create')}>
-            <Plus className="h-4 w-4 mr-2" />
+        <div className="mb-8 flex items-center justify-between flex-wrap gap-4">
+          <div>
+            <h1 className="text-4xl font-bold bg-gradient-to-r from-accent to-secondary bg-clip-text text-transparent">
+              Quick Notes
+            </h1>
+            <p className="text-muted-foreground mt-2">Capture your thoughts and ideas</p>
+          </div>
+          <Button onClick={() => navigate('/notes/create')} size="lg" className="shadow-lg">
+            <Plus className="mr-2 h-5 w-5" />
             New Note
           </Button>
         </div>
 
-        <div className="mb-6">
-          <div className="relative">
-            <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-            <Input
-              placeholder="Search notes..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="pl-10"
-            />
-          </div>
-        </div>
+        <Card className="mb-6 border-2 shadow-lg">
+          <CardContent className="pt-6">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-5 w-5" />
+              <Input
+                placeholder="Search notes..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="pl-10 h-12 text-lg"
+              />
+            </div>
+          </CardContent>
+        </Card>
 
         {loading ? (
           <div className="flex justify-center py-12">

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { alarmService } from '@/services/alarmService';
 import { challengeService } from '@/services/challengeService';
+import { alarmScheduler } from '@/services/alarmScheduler';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -48,6 +49,7 @@ export default function AlarmChallenge() {
     );
 
     if (isCorrect) {
+      alarmScheduler.stopSound();
       setIsPlaying(false);
       toast({
         title: 'Correct!',
@@ -74,27 +76,32 @@ export default function AlarmChallenge() {
   }
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center p-6">
-      <Card className="w-full max-w-lg">
-        <CardHeader className="text-center">
-          <div className="flex justify-center mb-4">
-            <Bell className="h-16 w-16 text-primary animate-bounce" />
+    <div className="min-h-screen bg-gradient-to-br from-background via-primary/5 to-background flex items-center justify-center p-6">
+      <Card className="w-full max-w-lg shadow-2xl border-2 border-primary/20">
+        <CardHeader className="text-center space-y-4">
+          <div className="flex justify-center">
+            <div className="relative">
+              <Bell className="h-20 w-20 text-primary animate-bounce" />
+              <div className="absolute inset-0 bg-primary/20 rounded-full blur-xl"></div>
+            </div>
           </div>
-          <CardTitle className="text-2xl">{alarm.title}</CardTitle>
-          <p className="text-muted-foreground mt-2">
+          <CardTitle className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+            {alarm.title}
+          </CardTitle>
+          <p className="text-muted-foreground">
             Solve this {challenge.type.toLowerCase()} challenge to dismiss the alarm
           </p>
         </CardHeader>
         <CardContent className="space-y-6">
           {isPlaying && (
-            <div className="flex items-center justify-center gap-2 text-primary">
-              <Volume2 className="h-5 w-5 animate-pulse" />
-              <span className="text-sm">Alarm ringing...</span>
+            <div className="flex items-center justify-center gap-3 text-primary bg-primary/10 rounded-lg py-3 px-4">
+              <Volume2 className="h-6 w-6 animate-pulse" />
+              <span className="text-base font-semibold">Alarm ringing...</span>
             </div>
           )}
 
-          <div className="bg-muted p-6 rounded-lg text-center">
-            <p className="text-lg font-semibold">{challenge.question}</p>
+          <div className="bg-gradient-to-br from-muted to-muted/50 p-8 rounded-xl text-center border-2 border-primary/10 shadow-inner">
+            <p className="text-2xl font-bold">{challenge.question}</p>
           </div>
 
           <div className="space-y-4">
@@ -105,12 +112,12 @@ export default function AlarmChallenge() {
               placeholder="Enter your answer"
               onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
               autoFocus
-              className="text-center text-lg"
+              className="text-center text-xl h-14 border-2"
             />
 
             <Button 
               onClick={handleSubmit} 
-              className="w-full"
+              className="w-full h-14 text-lg shadow-lg bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70"
               size="lg"
             >
               Submit Answer
@@ -118,8 +125,8 @@ export default function AlarmChallenge() {
           </div>
 
           {attempts > 0 && (
-            <p className="text-center text-sm text-muted-foreground">
-              Attempts: {attempts}
+            <p className="text-center text-sm text-muted-foreground bg-muted/50 py-2 px-4 rounded-lg">
+              Attempts: <span className="font-semibold text-foreground">{attempts}</span>
             </p>
           )}
         </CardContent>

@@ -64,42 +64,59 @@ export default function CreateReminder() {
   };
 
   return (
-    <div className="min-h-screen bg-background p-6">
+    <div className="min-h-screen p-6">
       <div className="max-w-2xl mx-auto">
-        <Button variant="ghost" onClick={() => navigate('/reminders')} className="mb-4">
-          <ArrowLeft className="h-4 w-4 mr-2" />
-          Back
-        </Button>
+        <div className="mb-8">
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-secondary to-primary bg-clip-text text-transparent">
+            Create Task
+          </h1>
+          <p className="text-muted-foreground mt-2">Add a new task to your daily routine</p>
+        </div>
 
-        <Card>
+        <Card className="border-2 shadow-lg">
           <CardHeader>
-            <CardTitle>Create New Task</CardTitle>
+            <CardTitle className="text-2xl">New Task</CardTitle>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-6">
+              <div>
+                <Label htmlFor="category">Category *</Label>
+                <Select value={category || ''} onValueChange={setCategory}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select category" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="daily_activity">Daily Activity</SelectItem>
+                    <SelectItem value="water">Water Intake</SelectItem>
+                    <SelectItem value="medicine">Medicine</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
               <div>
                 <Label htmlFor="title">Task Title *</Label>
                 <Input
                   id="title"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-                  placeholder="Enter task title"
+                  placeholder="e.g., Morning jog, Drink water, Take vitamins"
+                  required
                 />
               </div>
 
               <div>
-                <Label htmlFor="description">Description</Label>
+                <Label htmlFor="description">Notes (Optional)</Label>
                 <Textarea
                   id="description"
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
-                  placeholder="Add more details..."
-                  rows={4}
+                  placeholder="Add any additional notes..."
+                  className="min-h-[100px]"
                 />
               </div>
 
               <div>
-                <Label htmlFor="dueDate">Due Date</Label>
+                <Label htmlFor="dueDate">Due Date & Time</Label>
                 <Input
                   id="dueDate"
                   type="datetime-local"
@@ -109,7 +126,7 @@ export default function CreateReminder() {
               </div>
 
               <div>
-                <Label>Priority</Label>
+                <Label htmlFor="priority">Priority</Label>
                 <Select value={priority} onValueChange={(v: any) => setPriority(v)}>
                   <SelectTrigger>
                     <SelectValue />
@@ -123,21 +140,11 @@ export default function CreateReminder() {
                 </Select>
               </div>
 
-              <div>
-                <Label htmlFor="category">Category</Label>
-                <Input
-                  id="category"
-                  value={category}
-                  onChange={(e) => setCategory(e.target.value)}
-                  placeholder="e.g., Work, Personal, Shopping"
-                />
-              </div>
-
-              <div className="flex gap-2">
-                <Button type="submit" disabled={loading} className="flex-1">
+              <div className="flex gap-2 pt-4">
+                <Button type="submit" disabled={loading} className="flex-1" size="lg">
                   {loading ? 'Creating...' : 'Create Task'}
                 </Button>
-                <Button type="button" variant="outline" onClick={() => navigate('/reminders')}>
+                <Button type="button" variant="outline" onClick={() => navigate('/reminders')} size="lg">
                   Cancel
                 </Button>
               </div>

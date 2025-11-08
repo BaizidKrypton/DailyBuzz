@@ -19,6 +19,7 @@ export default function CreateAlarm() {
   const [challengeType, setChallengeType] = useState<'MATH' | 'LOGIC' | 'TRIVIA' | 'MEMORY'>('MATH');
   const [difficulty, setDifficulty] = useState<'EASY' | 'MEDIUM' | 'HARD'>('MEDIUM');
   const [vibrationEnabled, setVibrationEnabled] = useState(true);
+  const [alarmTone, setAlarmTone] = useState('default');
   const [loading, setLoading] = useState(false);
   
   const { user } = useAuth();
@@ -63,6 +64,7 @@ export default function CreateAlarm() {
         days_of_week: daysOfWeek,
         challenge_type: challengeType,
         difficulty,
+        alarm_tone: alarmTone,
         vibration_enabled: vibrationEnabled,
         is_active: true
       });
@@ -159,6 +161,21 @@ export default function CreateAlarm() {
                     <SelectItem value="EASY">Easy</SelectItem>
                     <SelectItem value="MEDIUM">Medium</SelectItem>
                     <SelectItem value="HARD">Hard</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div>
+                <Label>Alarm Tone</Label>
+                <Select value={alarmTone} onValueChange={setAlarmTone}>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="default">Default Alarm</SelectItem>
+                    <SelectItem value="gentle">Gentle Wake</SelectItem>
+                    <SelectItem value="urgent">Urgent Alert</SelectItem>
+                    <SelectItem value="melody">Morning Melody</SelectItem>
                   </SelectContent>
                 </Select>
               </div>

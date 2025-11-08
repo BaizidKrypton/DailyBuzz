@@ -175,12 +175,17 @@ export default function EditReminder() {
               </div>
 
               <div>
-                <Label htmlFor="category">Category</Label>
-                <Input
-                  id="category"
-                  value={category}
-                  onChange={(e) => setCategory(e.target.value)}
-                />
+                <Label htmlFor="category">Category *</Label>
+                <Select value={category || ''} onValueChange={setCategory}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select category" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="daily_activity">Daily Activity</SelectItem>
+                    <SelectItem value="water">Water Intake</SelectItem>
+                    <SelectItem value="medicine">Medicine</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
 
               <div className="flex gap-2">

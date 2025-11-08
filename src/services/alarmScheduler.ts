@@ -1,7 +1,9 @@
 import { alarmService } from './alarmService';
+import { audioUtils } from '@/utils/audioUtils';
 
 let checkInterval: NodeJS.Timeout | null = null;
 let onAlarmTrigger: ((alarmId: string) => void) | null = null;
+let volumeInterval: any;
 
 export const alarmScheduler = {
   start(userId: string, callback: (alarmId: string) => void) {
@@ -25,7 +27,12 @@ export const alarmScheduler = {
       clearInterval(checkInterval);
       checkInterval = null;
     }
+    audioUtils.stopAlarmSound(volumeInterval);
     onAlarmTrigger = null;
+  },
+
+  stopSound() {
+    audioUtils.stopAlarmSound(volumeInterval);
   },
 
   async checkAlarms(userId: string) {
@@ -51,12 +58,16 @@ export const alarmScheduler = {
           
           if (!lastTriggered || parseInt(lastTriggered) < twoMinutesAgo) {
             localStorage.setItem(`alarm_triggered_${alarm.id}`, String(Date.now()));
-            onAlarmTrigger(alarm.id);
+            
+            // Play alarm sound
+            volumeInterval = await audioUtils.playAlarmSound(alarm.alarm_tone || 'default');
             
             // Vibrate if enabled
             if (alarm.vibration_enabled && 'vibrate' in navigator) {
               navigator.vibrate([500, 200, 500, 200, 500]);
             }
+            
+            onAlarmTrigger(alarm.id);
           }
         }
       }

@@ -2,11 +2,14 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import { ThemeProvider } from "next-themes";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { BottomNav } from "./components/BottomNav";
 import { TopBar } from "./components/TopBar";
+import { useAuth } from "./hooks/useAuth";
+import { alarmScheduler } from "./services/alarmScheduler";
+import { useEffect } from "react";
 import Index from "./pages/Index";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
@@ -29,13 +32,30 @@ import Profile from "./pages/Profile";
 
 const queryClient = new QueryClient();
 
-const AppLayout = ({ children }: { children: React.ReactNode }) => (
-  <div className="flex flex-col min-h-screen">
-    <TopBar />
-    <main className="flex-1 pb-16">{children}</main>
-    <BottomNav />
-  </div>
-);
+const AppLayout = ({ children }: { children: React.ReactNode }) => {
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      alarmScheduler.start(user.id, (alarmId) => {
+        navigate(`/alarm-challenge/${alarmId}`);
+      });
+    }
+
+    return () => {
+      alarmScheduler.stop();
+    };
+  }, [user, navigate]);
+
+  return (
+    <div className="flex flex-col min-h-screen bg-gradient-to-br from-background via-background to-primary/5">
+      <TopBar />
+      <main className="flex-1 pb-16">{children}</main>
+      <BottomNav />
+    </div>
+  );
+};
 
 const App = () => (
   <QueryClientProvider client={queryClient}>

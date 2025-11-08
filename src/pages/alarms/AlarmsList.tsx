@@ -72,30 +72,34 @@ export default function AlarmsList() {
   const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
   return (
-    <div className="min-h-screen bg-background p-6">
-      <div className="max-w-4xl mx-auto">
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-bold flex items-center gap-2">
-            <Clock className="h-8 w-8" />
-            Alarms
-          </h1>
-          <Button onClick={() => navigate('/alarms/create')}>
-            <Plus className="h-4 w-4 mr-2" />
+    <div className="min-h-screen p-6">
+      <div className="max-w-6xl mx-auto">
+        <div className="mb-8 flex items-center justify-between flex-wrap gap-4">
+          <div>
+            <h1 className="text-4xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+              Alarms
+            </h1>
+            <p className="text-muted-foreground mt-2">Manage your wake-up challenges</p>
+          </div>
+          <Button onClick={() => navigate('/alarms/create')} size="lg" className="shadow-lg">
+            <Plus className="mr-2 h-5 w-5" />
             Add Alarm
           </Button>
         </div>
 
-        <div className="mb-6">
-          <div className="relative">
-            <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-            <Input
-              placeholder="Search alarms..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="pl-10"
-            />
-          </div>
-        </div>
+        <Card className="mb-6 border-2 shadow-lg">
+          <CardContent className="pt-6">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-5 w-5" />
+              <Input
+                placeholder="Search alarms..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="pl-10 h-12 text-lg"
+              />
+            </div>
+          </CardContent>
+        </Card>
 
         {loading ? (
           <div className="flex justify-center py-12">
