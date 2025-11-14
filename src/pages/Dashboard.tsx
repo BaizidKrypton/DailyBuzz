@@ -31,9 +31,13 @@ export default function Dashboard() {
         notesService.getNotes(user!.id)
       ]);
       
+      const dailyTasks = tasks.filter(t => t.category === 'Daily Activity' && t.status === 'PENDING');
+      const waterTasks = tasks.filter(t => t.category === 'Water' && t.status === 'PENDING');
+      const medicineTasks = tasks.filter(t => t.category === 'Medicine' && t.status === 'PENDING');
+      
       setStats({
         alarms: alarms.filter(a => a.is_active).length,
-        tasks: tasks.filter(t => t.status === 'PENDING').length,
+        tasks: dailyTasks.length + waterTasks.length + medicineTasks.length,
         notes: notes.length
       });
     } catch (error) {
