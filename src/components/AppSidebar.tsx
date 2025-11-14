@@ -19,9 +19,7 @@ export function AppSidebar() {
     { icon: User, label: 'Profile', path: '/profile' },
     { icon: Settings, label: 'Settings', path: '/settings' },
     { icon: BarChart3, label: 'Analytics', path: '/analytics' },
-    { icon: MessageSquare, label: 'Feedback', path: '/feedback' },
     { icon: HelpCircle, label: 'Help', path: '/help' },
-    { icon: Cloud, label: 'Cloud Sync', path: '/cloud-sync' },
   ];
 
   const handleLogout = async () => {
@@ -38,8 +36,8 @@ export function AppSidebar() {
       </SheetTrigger>
       <SheetContent side="left" className="w-72 bg-gradient-to-br from-background to-primary/5">
         <SheetHeader>
-          <SheetTitle className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-            DailyBuzz+
+          <SheetTitle className="text-2xl font-bold text-primary">
+            DailyBuzz
           </SheetTitle>
         </SheetHeader>
         <div className="mt-8 space-y-2">

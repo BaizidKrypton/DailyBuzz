@@ -32,9 +32,7 @@ import Profile from "./pages/Profile";
 import FinanceList from "./pages/finance/FinanceList";
 import CreateFinance from "./pages/finance/CreateFinance";
 import Analytics from "./pages/Analytics";
-import Feedback from "./pages/Feedback";
 import Help from "./pages/Help";
-import CloudSync from "./pages/CloudSync";
 
 const queryClient = new QueryClient();
 
@@ -90,9 +88,7 @@ const App = () => (
             <Route path="/finance" element={<ProtectedRoute><AppLayout><FinanceList /></AppLayout></ProtectedRoute>} />
             <Route path="/finance/create" element={<ProtectedRoute><AppLayout><CreateFinance /></AppLayout></ProtectedRoute>} />
             <Route path="/analytics" element={<ProtectedRoute><AppLayout><Analytics /></AppLayout></ProtectedRoute>} />
-            <Route path="/feedback" element={<ProtectedRoute><AppLayout><Feedback /></AppLayout></ProtectedRoute>} />
             <Route path="/help" element={<ProtectedRoute><AppLayout><Help /></AppLayout></ProtectedRoute>} />
-            <Route path="/cloud-sync" element={<ProtectedRoute><AppLayout><CloudSync /></AppLayout></ProtectedRoute>} />
             <Route path="/settings" element={<ProtectedRoute><AppLayout><Settings /></AppLayout></ProtectedRoute>} />
             <Route path="/profile" element={<ProtectedRoute><AppLayout><Profile /></AppLayout></ProtectedRoute>} />
             <Route path="*" element={<NotFound />} />

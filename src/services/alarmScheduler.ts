@@ -27,12 +27,12 @@ export const alarmScheduler = {
       clearInterval(checkInterval);
       checkInterval = null;
     }
-    audioUtils.stopAlarmSound(volumeInterval);
+      audioUtils.stopAlarmSound();
     onAlarmTrigger = null;
   },
 
   stopSound() {
-    audioUtils.stopAlarmSound(volumeInterval);
+    audioUtils.stopAlarmSound();
   },
 
   async checkAlarms(userId: string) {
