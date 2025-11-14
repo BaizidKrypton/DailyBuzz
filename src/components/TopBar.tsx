@@ -30,8 +30,8 @@ export function TopBar() {
       <div className="flex items-center justify-between h-16 px-4">
         <div className="flex items-center gap-3">
           <AppSidebar />
-          <h1 className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-            DailyBuzz+
+          <h1 className="text-2xl font-bold text-primary">
+            DailyBuzz
           </h1>
         </div>
 

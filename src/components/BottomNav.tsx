@@ -4,7 +4,7 @@ import { Home, Clock, Droplets, Wallet, MessageCircle } from 'lucide-react';
 const navItems = [
   { to: '/dashboard', icon: Home, label: 'Home' },
   { to: '/alarms', icon: Clock, label: 'Alarms' },
-  { to: '/reminders', icon: Droplets, label: 'Health' },
+  { to: '/reminders', icon: Droplets, label: 'Tasks' },
   { to: '/finance', icon: Wallet, label: 'Finance' },
   { to: '/buzz', icon: MessageCircle, label: 'Buzz' },
 ];
